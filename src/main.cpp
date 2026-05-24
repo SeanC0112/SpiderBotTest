@@ -63,4 +63,8 @@ void setup()
 void loop()
 {
   // put your main code here, to run repeatedly:
+  flhServo.write(90);
+  sleep(1);
+  flhServo.write(0);
+  sleep(1);
 }
