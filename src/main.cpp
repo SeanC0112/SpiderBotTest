@@ -37,6 +37,8 @@ Servo brvoServo;
 
 void setup()
 {
+  Serial.begin(115200);
+  delay(1000);
   // put your setup code here, to run once:
   // ESP32PWM::allocateTimer(0);
   // ESP32PWM::allocateTimer(1);
@@ -48,21 +50,21 @@ void setup()
   // ESP32PWM::allocateTimer(6);
   // ESP32PWM::allocateTimer(7);
 
-  flhServo.attach(flh, 500, 2400);
-  flviServo.attach(flvi, 500, 2400);
-  flvoServo.attach(flvo, 500, 2400);
+  Serial.printf("Attaching flhServo to pwm %d\n", flhServo.attach(flh, 500, 2400));
+  Serial.printf("Attaching flviServo to pwm %d\n", flviServo.attach(flvi, 500, 2400));
+  Serial.printf("Attaching flvoServo to pwm %d\n", flvoServo.attach(flvo, 500, 2400));
 
-  frhServo.attach(frh, 500, 2400);
-  frviServo.attach(frvi, 500, 2400);
-  frvoServo.attach(frvo, 500, 2400);
+  Serial.printf("Attaching frhServo to pwm %d\n", frhServo.attach(frh, 500, 2400));
+  Serial.printf("Attaching frviServo to pwm %d\n", frviServo.attach(frvi, 500, 2400));
+  Serial.printf("Attaching frvoServo to pwm %d\n", frvoServo.attach(frvo, 500, 2400));
 
-  blhServo.attach(blh, 500, 2400);
-  blviServo.attach(blvi, 500, 2400);
-  blvoServo.attach(blvo, 500, 2400);
+  Serial.printf("Attaching blhServo to pwm %d\n", blhServo.attach(blh, 500, 2400));
+  Serial.printf("Attaching blviServo to pwm %d\n", blviServo.attach(blvi, 500, 2400));
+  Serial.printf("Attaching blvoServo to pwm %d\n", blvoServo.attach(blvo, 500, 2400));
 
-  brhServo.attach(brh, 500, 2400);
-  brviServo.attach(brvi, 500, 2400);
-  brvoServo.attach(brvo, 500, 2400);
+  Serial.printf("Attaching brhServo to pwm %d\n", brhServo.attach(brh, 500, 2400));
+  Serial.printf("Attaching brviServo to pwm %d\n", brviServo.attach(brvi, 500, 2400));
+  Serial.printf("Attaching brvoServo to pwm %d\n", brvoServo.attach(brvo, 500, 2400));
 }
 
 void loop()
