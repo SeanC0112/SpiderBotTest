@@ -3,17 +3,17 @@
 
 // f:front, b:back, l:left, r:right, h:horizontal, v:vertical, i:inner, o:outer
 
-int flh = 6;
-int flvi = 7;
-int flvo = 15;
+int flh = 4;
+int flvi = 36;
+int flvo = 37;
 
 Servo flhServo;
 Servo flviServo;
 Servo flvoServo;
 
-int frh = 41;
-int frvi = 40;
-int frvo = 39;
+int frh = 42;
+int frvi = 17;
+int frvo = 7;
 
 Servo frhServo;
 Servo frviServo;
@@ -27,8 +27,8 @@ Servo blhServo;
 Servo blviServo;
 Servo blvoServo;
 
-int brh = 19;
-int brvi = 20;
+int brh = 35;
+int brvi = 18;
 int brvo = 21;
 
 Servo brhServo;
@@ -38,10 +38,15 @@ Servo brvoServo;
 void setup()
 {
   // put your setup code here, to run once:
-  ESP32PWM::allocateTimer(0);
-  ESP32PWM::allocateTimer(1);
-  ESP32PWM::allocateTimer(2);
-  ESP32PWM::allocateTimer(3);
+  // ESP32PWM::allocateTimer(0);
+  // ESP32PWM::allocateTimer(1);
+  // ESP32PWM::allocateTimer(2);
+  // ESP32PWM::allocateTimer(3);
+
+  // ESP32PWM::allocateTimer(4);
+  // ESP32PWM::allocateTimer(5);
+  // ESP32PWM::allocateTimer(6);
+  // ESP32PWM::allocateTimer(7);
 
   flhServo.attach(flh, 500, 2400);
   flviServo.attach(flvi, 500, 2400);
@@ -63,8 +68,8 @@ void setup()
 void loop()
 {
   // put your main code here, to run repeatedly:
-  flhServo.write(90);
-  sleep(1);
-  flhServo.write(0);
-  sleep(1);
+  // flhServo.write(90);
+  // sleep(1);
+  // flhServo.write(0);
+  // sleep(1);
 }
