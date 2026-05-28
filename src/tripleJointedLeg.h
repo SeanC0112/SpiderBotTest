@@ -65,6 +65,12 @@ public:
 
     pose3D getCurrentPose();
     legState getCurrentState();
+
+    void updateConfig(legConfig newConfig);
+
+    void setH(float angle);
+    void setVI(float angle);
+    void setVO(float angle);
 };
 
 #endif
