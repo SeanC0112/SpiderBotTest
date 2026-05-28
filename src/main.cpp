@@ -11,7 +11,7 @@ Servo flhServo;
 Servo flviServo;
 Servo flvoServo;
 
-int frh = 42;
+int frh = 39;
 int frvi = 17;
 int frvo = 7;
 
@@ -40,15 +40,15 @@ void setup()
   Serial.begin(115200);
   delay(1000);
   // put your setup code here, to run once:
-  // ESP32PWM::allocateTimer(0);
-  // ESP32PWM::allocateTimer(1);
-  // ESP32PWM::allocateTimer(2);
-  // ESP32PWM::allocateTimer(3);
+  ESP32PWM::allocateTimer(0);
+  ESP32PWM::allocateTimer(1);
+  ESP32PWM::allocateTimer(2);
+  ESP32PWM::allocateTimer(3);
 
-  // ESP32PWM::allocateTimer(4);
-  // ESP32PWM::allocateTimer(5);
-  // ESP32PWM::allocateTimer(6);
-  // ESP32PWM::allocateTimer(7);
+  ESP32PWM::allocateTimer(4);
+  ESP32PWM::allocateTimer(5);
+  ESP32PWM::allocateTimer(6);
+  ESP32PWM::allocateTimer(7);
 
   Serial.printf("Attaching flhServo to pwm %d\n", flhServo.attach(flh, 500, 2400));
   Serial.printf("Attaching flviServo to pwm %d\n", flviServo.attach(flvi, 500, 2400));
@@ -70,8 +70,36 @@ void setup()
 void loop()
 {
   // put your main code here, to run repeatedly:
-  // flhServo.write(90);
-  // sleep(1);
-  // flhServo.write(0);
-  // sleep(1);
+  // frvi servo needs to be tuned to correct angles
+  // frh and flh oscillate weirdly
+  flhServo.write(0);
+  Serial.printf("flhServo read: %d\n", flhServo.read());
+  Serial.printf("flviServo read: %d\n", flviServo.read());
+  Serial.printf("flvoServo read: %d\n", flvoServo.read());
+  Serial.printf("frhServo read: %d\n", frhServo.read());
+  Serial.printf("frviServo read: %d\n", frviServo.read());
+  Serial.printf("frvoServo read: %d\n", frvoServo.read());
+  Serial.printf("blhServo read: %d\n", blhServo.read());
+  Serial.printf("blviServo read: %d\n", blviServo.read());
+  Serial.printf("blvoServo read: %d\n", blvoServo.read());
+  Serial.printf("brhServo read: %d\n", brhServo.read());
+  Serial.printf("brviServo read: %d\n", brviServo.read());
+  Serial.printf("brvoServo read: %d\n", brvoServo.read());
+
+  delay(1000);
+  flhServo.write(90);
+  Serial.printf("flhServo read: %d\n", flhServo.read());
+  Serial.printf("flviServo read: %d\n", flviServo.read());
+  Serial.printf("flvoServo read: %d\n", flvoServo.read());
+  Serial.printf("frhServo read: %d\n", frviServo.read());
+  Serial.printf("frviServo read: %d\n", frviServo.read());
+  Serial.printf("frvoServo read: %d\n", frvoServo.read());
+  Serial.printf("blhServo read: %d\n", blhServo.read());
+  Serial.printf("blviServo read: %d\n", blviServo.read());
+  Serial.printf("blvoServo read: %d\n", blvoServo.read());
+  Serial.printf("brhServo read: %d\n", brhServo.read());
+  Serial.printf("brviServo read: %d\n", brviServo.read());
+  Serial.printf("brvoServo read: %d\n", brvoServo.read());
+
+  delay(1000);
 }
