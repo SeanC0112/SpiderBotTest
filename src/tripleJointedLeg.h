@@ -50,11 +50,12 @@ private:
 
     legConfig config;
 
-    pose3D currentPose;
     pose3D targetPose;
 
-    legState currentState;
     legState targetState;
+
+    pose3D calculatePoseFromState(legState state);
+    legState calculateStateFromPose(pose3D pose);
 
 public:
     tripleJointedLeg(legConfig config);
@@ -71,6 +72,8 @@ public:
     void setH(float angle);
     void setVI(float angle);
     void setVO(float angle);
+
+    void main(); // possibly unnecessary.
 };
 
 #endif
