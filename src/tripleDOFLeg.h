@@ -1,5 +1,5 @@
-#ifndef tripledofleg_h
-#define tripledofleg_h
+#ifndef TRIPLEDOFLEG_H
+#define TRIPLEDOFLEG_H
 #include <ESP32Servo.h>
 
 // possible future accuracy error with only using floats for a lot of these, maybe switch to double?
