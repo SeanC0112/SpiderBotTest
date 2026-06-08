@@ -99,6 +99,7 @@ pose3D tripleJointedLeg::calculatePoseFromState(legState state)
     return pose3D(x, y, z);
 }
 
+// Inverse kinematics who? fr this time
 legState tripleJointedLeg::calculateStateFromPose(pose3D pose)
 {
 }
