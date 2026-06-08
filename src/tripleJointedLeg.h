@@ -2,6 +2,7 @@
 #define triplejointedleg_h
 #include <ESP32Servo.h>
 
+// possible future accuracy error with only using floats for a lot of these, maybe switch to double?
 struct pose3D
 {
     float x;
