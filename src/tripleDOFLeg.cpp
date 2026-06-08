@@ -93,12 +93,14 @@ void tripleDOFLeg::setVI(float angle)
 // Shit this is fucking forward kinematics
 pose3D tripleDOFLeg::calculatePoseFromState(legState state)
 {
-    float angle = state.hAngle;
-    float outerMagnitude = sqrtf(config.outerLength * config.outerLength + config.middleLength * config.middleLength - 2 * config.outerLength * config.middleLength * cosf(state.voAngle));
-    float z = outerMagnitude * sinf(state.viAngle + state.voAngle);
-    float flatMagnitude = outerMagnitude * cosf(state.viAngle + state.voAngle) + config.innerLength;
-    float x = sinf(angle) * flatMagnitude;
-    float y = cosf(angle) * flatMagnitude;
+    float hAngle = degsToRads(state.hAngle);
+    float viAngle = degsToRads(state.viAngle);
+    float voAngle = degsToRads(state.voAngle);
+    float outerMagnitude = sqrtf(squared(config.outerLength) + squared(config.middleLength) - 2 * config.outerLength * config.middleLength * cosf(voAngle));
+    float z = outerMagnitude * sinf(viAngle + voAngle);
+    float flatMagnitude = outerMagnitude * cosf(viAngle + voAngle) + config.innerLength;
+    float x = sinf(hAngle) * flatMagnitude;
+    float y = cosf(hAngle) * flatMagnitude;
     return pose3D(x, y, z);
 }
 
