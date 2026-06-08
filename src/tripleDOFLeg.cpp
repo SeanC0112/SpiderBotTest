@@ -1,8 +1,8 @@
-#include <tripleJointedLeg.h>
+#include <tripleDOFLeg.h>
 #include <ESP32Servo.h>
 #include <math.h>
 
-tripleJointedLeg::tripleJointedLeg(legConfig config)
+tripleDOFLeg::tripleDOFLeg(legConfig config)
 {
     this->config = config;
 
@@ -11,14 +11,14 @@ tripleJointedLeg::tripleJointedLeg(legConfig config)
     vo.attach(config.voPin);
 }
 
-tripleJointedLeg::~tripleJointedLeg()
+tripleDOFLeg::~tripleDOFLeg()
 {
     h.detach();
     vi.detach();
     vo.detach();
 }
 
-void tripleJointedLeg::updateConfig(legConfig newConfig)
+void tripleDOFLeg::updateConfig(legConfig newConfig)
 {
     h.detach();
     vi.detach();
@@ -31,14 +31,14 @@ void tripleJointedLeg::updateConfig(legConfig newConfig)
     vo.attach(config.voPin);
 }
 
-void tripleJointedLeg::main()
+void tripleDOFLeg::main()
 {
     h.write(config.hOffset + targetState.hAngle);
     vi.write(config.viOffset + targetState.viAngle);
     vo.write(config.voOffset + targetState.voAngle);
 }
 
-void tripleJointedLeg::moveToPose(pose3D targetPose)
+void tripleDOFLeg::moveToPose(pose3D targetPose)
 {
     this->targetPose = targetPose;
     this->targetState = calculateStateFromPose(targetPose);
@@ -46,7 +46,7 @@ void tripleJointedLeg::moveToPose(pose3D targetPose)
     main();
 }
 
-void tripleJointedLeg::moveToState(legState targetState)
+void tripleDOFLeg::moveToState(legState targetState)
 {
     this->targetState = targetState;
     this->targetPose = calculatePoseFromState(targetState);
@@ -54,32 +54,32 @@ void tripleJointedLeg::moveToState(legState targetState)
     main();
 }
 
-pose3D tripleJointedLeg::getCurrentPose()
+pose3D tripleDOFLeg::getCurrentPose()
 {
     legState currentState(-config.hOffset + h.read(), -config.viOffset + vi.read(), -config.voOffset + vo.read());
     return calculatePoseFromState(currentState);
 }
 
-legState tripleJointedLeg::getCurrentState()
+legState tripleDOFLeg::getCurrentState()
 {
     return legState(-config.hOffset + h.read(), -config.viOffset + vi.read(), -config.voOffset + vo.read());
 }
 
-void tripleJointedLeg::setH(float angle)
+void tripleDOFLeg::setH(float angle)
 {
     targetState.hAngle = angle;
     targetPose = calculatePoseFromState(targetState);
     main();
 }
 
-void tripleJointedLeg::setVO(float angle)
+void tripleDOFLeg::setVO(float angle)
 {
     targetState.voAngle = angle;
     targetPose = calculatePoseFromState(targetState);
     main();
 }
 
-void tripleJointedLeg::setVI(float angle)
+void tripleDOFLeg::setVI(float angle)
 {
     targetState.viAngle = angle;
     targetPose = calculatePoseFromState(targetState);
@@ -88,7 +88,7 @@ void tripleJointedLeg::setVI(float angle)
 
 // Inverse Kinematics who?
 // Shit this is fucking forward kinematics
-pose3D tripleJointedLeg::calculatePoseFromState(legState state)
+pose3D tripleDOFLeg::calculatePoseFromState(legState state)
 {
     float angle = state.hAngle;
     float outerMagnitude = sqrtf(config.outerLength * config.outerLength + config.middleLength * config.middleLength - 2 * config.outerLength * config.middleLength * cosf(state.voAngle));
@@ -100,6 +100,6 @@ pose3D tripleJointedLeg::calculatePoseFromState(legState state)
 }
 
 // Inverse kinematics who? fr this time
-legState tripleJointedLeg::calculateStateFromPose(pose3D pose)
+legState tripleDOFLeg::calculateStateFromPose(pose3D pose)
 {
 }

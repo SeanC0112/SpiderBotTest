@@ -1,5 +1,5 @@
-#ifndef triplejointedleg_h
-#define triplejointedleg_h
+#ifndef tripledofleg_h
+#define tripledofleg_h
 #include <ESP32Servo.h>
 
 // possible future accuracy error with only using floats for a lot of these, maybe switch to double?
@@ -42,7 +42,7 @@ struct legConfig
                                                                            hOffset(hOffset), viOffset(viOffset), voOffset(voOffset) {}
 };
 
-class tripleJointedLeg
+class tripleDOFLeg
 {
 private:
     Servo h;
@@ -59,8 +59,8 @@ private:
     legState calculateStateFromPose(pose3D pose);
 
 public:
-    tripleJointedLeg(legConfig config);
-    ~tripleJointedLeg();
+    tripleDOFLeg(legConfig config);
+    ~tripleDOFLeg();
 
     void moveToPose(pose3D targetPose);
     void moveToState(legState targetState);
