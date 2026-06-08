@@ -1,6 +1,9 @@
 #include <tripleDOFLeg.h>
 #include <ESP32Servo.h>
 #include <math.h>
+#include <util.h>
+
+using namespace Util;
 
 tripleDOFLeg::tripleDOFLeg(legConfig config)
 {
