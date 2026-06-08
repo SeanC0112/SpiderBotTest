@@ -107,4 +107,12 @@ pose3D tripleDOFLeg::calculatePoseFromState(legState state)
 // Inverse kinematics who? fr this time
 legState tripleDOFLeg::calculateStateFromPose(pose3D pose)
 {
+    float flatMagnitude = sqrtf(pose.x * pose.x + pose.y * pose.y);
+    float hAngle = radsToDegs(acosf(pose.x / flatMagnitude));
+    float outerMagnitude = sqrtf(squared(flatMagnitude - config.innerLength) + squared(pose.z));
+    float lowerInnerAngle = radsToDegs(asinf((flatMagnitude - config.innerLength) / outerMagnitude)); // some weird angles could happen with arcsin being between -90 to 90
+    float upperInnerAngle = radsToDegs(acosf((squared(config.outerLength) - squared(config.middleLength) - squared(outerMagnitude)) / (-2 * outerMagnitude * config.middleLength)));
+    float viAngle = 180 - lowerInnerAngle - upperInnerAngle;
+    float voAngle = 180 - radsToDegs(acosf((squared(outerMagnitude) - squared(config.outerLength) - squared(config.middleLength)) / (-2 * config.middleLength * config.outerLength))); // assuming fully extended is 0
+    return legState(hAngle, viAngle, voAngle);
 }
