@@ -1,5 +1,6 @@
 #include <tripleJointedLeg.h>
 #include <ESP32Servo.h>
+#include <math.h>
 
 tripleJointedLeg::tripleJointedLeg(legConfig config)
 {
@@ -83,4 +84,21 @@ void tripleJointedLeg::setVI(float angle)
     targetState.viAngle = angle;
     targetPose = calculatePoseFromState(targetState);
     main();
+}
+
+// Inverse Kinematics who?
+// Shit this is fucking forward kinematics
+pose3D tripleJointedLeg::calculatePoseFromState(legState state)
+{
+    float angle = state.hAngle;
+    float outerMagnitude = sqrtf(config.outerLength * config.outerLength + config.middleLength * config.middleLength - 2 * config.outerLength * config.middleLength * cosf(state.voAngle));
+    float z = outerMagnitude * sinf(state.viAngle + state.voAngle);
+    float flatMagnitude = outerMagnitude * cosf(state.viAngle + state.voAngle) + config.innerLength;
+    float x = sinf(angle) * flatMagnitude;
+    float y = cosf(angle) * flatMagnitude;
+    return pose3D(x, y, z);
+}
+
+legState tripleJointedLeg::calculateStateFromPose(pose3D pose)
+{
 }
