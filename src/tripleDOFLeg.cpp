@@ -5,10 +5,8 @@
 
 using namespace Util;
 
-tripleDOFLeg::tripleDOFLeg(legConfig config)
+tripleDOFLeg::tripleDOFLeg(legConfig config) : config(config), targetPose(0, 0, 0), targetState(0, 0, 0)
 {
-    this->config = config;
-
     h.attach(config.hPin);
     vi.attach(config.viPin);
     vo.attach(config.voPin);
